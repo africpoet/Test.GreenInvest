@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@model IEnumerable<GreenInvest.Models.ReferralViewModel>
+@{
+    ViewBag.Title = "Downlinks";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-file"></i> Reports
+                </li>
+                <li class="active">
+                    <i class="fa fa-file"></i> @ViewBag.Title
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="datatable">
+                    <tr>
+                        <td colspan="5" cellspacing="1">
+                            <div class="referral">
+                                <img src="~/Content/Images/referral.png" /><br />
+                                @ViewBag.MyReferralNames
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            @*<div class="referral-item">*@
+                            <td style="text-align:center;">
+                                <img src="~/Content/Images/referral2.png" /><br />
+                                @item.Firstname @item.Surname  <br />
+                                @item.AccountId
+                            </td>
+                            @*</div>*@
+                        }
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- /.container-fluid -->

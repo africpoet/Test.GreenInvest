@@ -1,0 +1,125 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@model IEnumerable<GreenInvest.Models.PaymentViewModel>
+
+@{
+    ViewBag.Title = "View Paid Members";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+}
+
+<div class="panel">
+    <div class="panel-heading"><h2>View Paid Members</h2></div>
+    <div class="panel-body">
+
+        <p>
+            @*@Html.ActionLink("Create New", "Create")*@
+        </p>
+        <div class="table-responsive ">
+            <table class="table  table-striped table-hover table-bordered" id="datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            S/No.
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AccountId)
+                        </th>
+                        <th>Downlinks</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Firstname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Othernames)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailAddress)
+                        </th>
+                        @*<th>
+                        @Html.DisplayNameFor(model => model.BankName)
+                    </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountPaid)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PaymentStatus)
+                        </th>
+                        @*<th>
+                        @Html.DisplayNameFor(model => model.DatePaid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateRecorded)
+                    </th>*@
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(i++)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountId)
+                            </td>
+                            <td>                             
+                                @Html.ActionLink("Downlinks", "GetReferrals", new { referralid = item.AccountId })  (@Html.Action("CountDownlink", "Admin", new { referralid = item.AccountId }))
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Firstname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Othernames)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            @*<td>
+                            @Html.DisplayFor(modelItem => item.BankName)
+                        </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AmountPaid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentStatus)
+                            </td>
+                            @*<td>
+                            @Html.DisplayFor(modelItem => item.DatePaid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRecorded)
+                        </td>*@
+                           
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

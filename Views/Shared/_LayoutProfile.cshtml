@@ -1,0 +1,172 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@{
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    //Get the profile information about the user
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenInvest | @ViewBag.Title</title>
+    <meta name="keywords" content="GreenInvest, help entrepreneurs, Green Invest, referral program, Nizira Services, loan in Nigeria, access capital, TripleArc Technologies, million naira" />
+    <meta name="description" content="GreenInvest is an initiative of Nizira Services Company. It is a referral program with aim to help entrepreneurs and SMEs access capital in order to expand or grow their businesses without risks common with loan in Nigeria. Its a departure from the traditional method of loan and grants for start-ups. A beneficiary could access up to a million naira without collateral or any guarantor." />
+    <meta name="author" content="Akinbamido Sunday Yemi" />
+    <meta name="ROBOTS" content="ALL" />
+
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    <!-- Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="~/assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
+    <link href="~/assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Styles -->
+    <link href="~/assets/css/modern.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/custom.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
+    <script src="~/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <form class="search-form" action="#" method="GET">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control search-input" placeholder="Search...">
+            <span class="input-group-btn">
+                <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
+            </span>
+        </div><!-- Input Group -->
+    </form><!-- Search Form -->
+    <div class="page-content content-wrap">
+
+        @Html.Partial("_NavigationTopMenu")
+
+        @Html.Partial("_PageSideNav")
+
+        <div class="page-inner">
+
+            @Html.Partial("_ProfileCover")
+
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-3 user-profile">@Html.Partial("_UserProfile")</div>
+
+                    <div class="col-md-6 m-t-lg">@RenderBody()</div>
+
+                    <div class="col-md-3 m-t-lg">@Html.Partial("_RightInfoPanel")</div>
+                </div>
+            </div>
+
+            @Html.Partial("_Footer")
+
+        </div>
+
+    </div>
+
+
+    <nav class="cd-nav-container" id="cd-nav">
+        <header>
+            <h3>Navigation</h3>
+            <a href="#0" class="cd-close-nav">Close</a>
+        </header>
+        <ul class="cd-nav list-unstyled">
+            <li class="cd-selected" data-menu="index">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-home"></i>
+                    </span>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li data-menu="profile">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li data-menu="inbox">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                    <p>Mailbox</p>
+                </a>
+            </li>
+            <li data-menu="#">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-tasks"></i>
+                    </span>
+                    <p>Tasks</p>
+                </a>
+            </li>
+            <li data-menu="#">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </span>
+                    <p>Settings</p>
+                </a>
+            </li>
+            <li data-menu="calendar">
+                <a href="javsacript:void(0);">
+                    <span>
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                    <p>Calendar</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="cd-overlay"></div>
+
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+
+    <!-- Javascripts -->
+    <script src="~/assets/plugins/jquery/jquery-2.1.3.min.js"></script>
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/pace-master/pace.min.js"></script>
+    <script src="~/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/switchery/switchery.min.js"></script>
+    <script src="~/assets/plugins/uniform/jquery.uniform.min.js"></script>
+    <script src="~/assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+    <script src="~/assets/plugins/offcanvasmenueffects/js/main.js"></script>
+    <script src="~/assets/plugins/waves/waves.min.js"></script>
+    <script src="~/assets/plugins/3d-bold-navigation/js/main.js"></script>
+    <script src="~/assets/js/modern.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzjeZ1lORVesmjaaFu0EbYeTw84t1_nek"></script>
+    <script src="~/assets/js/pages/profile.js"></script>
+
+</body>
+</html>

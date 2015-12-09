@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@{
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    //Get the profile information about the user
+}
+<div class="profile-cover">
+    <div class="row">
+        <div class="col-md-3 profile-image">
+            <div class="profile-image-container">
+               
+                <img src="~/assets/images/logo.png" alt="">
+                @*<h1 style=" z-index:25000">@Html.Encode(@currentUser.Firstname).ToUpper().First()@Html.Encode(@currentUser.Surname).ToUpper().First()</h1>*@
+            </div>
+        </div>
+        @*<div class="col-md-12 profile-info">
+            <div class=" profile-info-value">
+                <h3>1020</h3>
+                <p>Followers</p>
+            </div>
+            <div class=" profile-info-value">
+                <h3>1780</h3>
+                <p>Friends</p>
+            </div>
+            <div class=" profile-info-value">
+                <h3>260</h3>
+                <p>Photos</p>
+            </div>
+        </div>*@
+    </div>
+</div>

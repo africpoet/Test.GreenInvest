@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+
+@{
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    //Get the profile information about the user
+}
+<div class="row top-middle-panel" style="line-height:32px">
+    <h4>Welcome, @currentUser.Firstname @currentUser.Surname</h4>
+    An Email has been sent to your email address @currentUser.Email ...<br />
+   <p>&nbsp;</p>
+    However, your payment to the following Bank Account need to be confirmed before you can have full access to GreenInvest Portal. 
+    <b>
+        <pre>
+            Bank: Ecobank PLC
+            Account Name: Nizira Services Company
+            Account Number: 2112189799 
+        </pre>
+    </b>
+    <hr />
+    @Html.ActionLink("Proceed to view your Dashboard Area", "Index", "Portal")
+    
+</div>
+

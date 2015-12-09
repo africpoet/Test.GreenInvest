@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@{
+    ViewBag.Title = "Downlink";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+}
+<div class="container-fluid">    
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-file"></i> Reports
+                </li>
+                <li class="active">
+                    <i class="fa fa-file"></i> @ViewBag.Title
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            <div class="referral">
+                <img src="~/Content/Images/referral.png" /><br />
+                @currentUser.Surname @currentUser.Firstname
+            </div>
+            @Html.Action("GetReferrals", "Portal", new { referralid = @currentUser.AccountNumber })
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->

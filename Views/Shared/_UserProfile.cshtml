@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNet.Identity
+@using GreenInvest.Models
+@{
+    //Instantiate the UserManager in ASP.Identity system so you can look up the user in the system
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    //Get the User object
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    //Get the profile information about the user
+}
+<h3 class="text-center">@currentUser.Firstname @currentUser.Surname</h3>
+<p class="text-center">@currentUser.AccountNumber</p>
+<hr>
+<ul class="list-unstyled text-center">
+    <li><p><i class="fa fa-map-marker m-r-xs"></i>@currentUser.City, Nigeria</p></li>
+    <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">@currentUser.Email</a></p></li>
+    @*<li><p><i class="fa fa-link m-r-xs"></i><a href="#">www.greeninvest.com.ng</a></p></li>*@
+</ul>
+<hr>
+<ul class="list-unstyled text-center">
+    <li><p><i class="fa fa-money m-r-xs"></i>Earning: NGN @Html.Action("GetEarning", "Portal")</p></li>
+    <li><p><i class="fa fa-institution m-r-xs"></i>Stage: @Html.Action("GetStage", "Portal")</p></li>
+</ul>
+<hr>
+@*<button class="btn btn-primary btn-block"><i class="fa fa-plus m-r-xs"></i>Follow</button>*@

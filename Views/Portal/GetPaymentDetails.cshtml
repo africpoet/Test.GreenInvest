@@ -1,0 +1,46 @@
+﻿
+@model IEnumerable<GreenInvest.Models.PaymentViewModel>
+
+
+@foreach (var item in Model)
+{ 
+    <div class="welcome-green">
+        <h3>Welcome, @item.Firstname @item.Surname</h3>
+
+        @if (item.PaymentStatus.Equals(true))
+        {
+            <div>
+                <div class="register-detailsz">
+                    Your GreenInvest Account ID is: @item.AccountId <br />
+                    Your GreenInvest Earning is: NGN @Html.Action("GetEarning", "Portal") <br />
+                </div>
+                <br />
+                Your payment of NGN @item.AmountPaid  to the following Bank Account has been confirmed. You can now use your Account ID: <b>@item.AccountId</b> as a reference number.
+                <br /><br />
+
+                <div class="register-details">
+                    Bank: Ecobank PLC <br />
+                    Account Name: Nizira Services Company <br />
+                    Account Number: 2112189799 <br />
+                    Amount Paid: @item.AmountPaid <br />
+                    Date Paid: @item.DatePaid <br />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div>
+                Your payment to the following Bank Account need to be confirmed before you can have full access to GreenInvest Portal.
+                <br /><br />
+
+                <div class="bank-details">
+                    Bank: Ecobank PLC <br />
+                    Account Name: Nizira Services Company <br />
+                    Account Number: 2112189799 <br />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+

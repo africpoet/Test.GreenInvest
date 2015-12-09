@@ -1,0 +1,13 @@
+﻿@model IEnumerable<GreenInvest.Models.ReferralViewModel>
+
+<div style="text-align: center;">
+    @foreach (var item in Model)
+    {        
+    <div class="team-member">
+        <div class="online on"></div>
+        <img src="~/Content/Images/referral2.png" title="@item.AccountId | @item.Surname @item.Firstname" />        
+    </div>
+    }
+
+</div>
+

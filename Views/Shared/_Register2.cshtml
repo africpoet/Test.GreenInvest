@@ -1,0 +1,187 @@
+﻿@model GreenInvest.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registration Form";
+   
+
+}
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4 style="color:#009933; padding-top:40px; font-size:16px; font-weight:bold">@ViewBag.Title.</h4>
+    <large>
+        <strong>To enrol pay NGN 2,000.00 to the following Bank Account: </strong><br />
+        Bank: Ecobank PLC <br />
+        Account Name: Nizira Services Company <br />
+        Account Number: 2112189799
+    </large>
+    <br /><br />
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+    <span class="text-danger">@ViewBag.ReferenceError</span>
+    <div class="reg-divider">Personal Details</div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Firstname, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Firstname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Othernames, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Othernames, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control datepicker", placeholder = "Enter Birth Date here..." })
+            @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+     <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "e.g 08080721800" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="reg-divider">Location Details</div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TheStateId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.Othernames, new { @class = "form-control" })*@
+            @Html.DropDownList("TheStateId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TheStateId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="reg-divider">Payment Details</div>    
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.BankId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.Othernames, new { @class = "form-control" })*@
+            @Html.DropDownList("BankId", null, htmlAttributes: new { @class = "form-control", @selected="3" })
+            @Html.ValidationMessageFor(m => m.BankId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    {var listItems = new List<System.Web.UI.WebControls.ListItem>
+    {
+          new System.Web.UI.WebControls.ListItem { Text = "1000", Value="1000" },
+          new System.Web.UI.WebControls.ListItem { Text = "2000", Value="2000" },
+          new System.Web.UI.WebControls.ListItem { Text = "3000", Value="3000" },
+          new System.Web.UI.WebControls.ListItem { Text = "4000", Value="4000" }
+    };
+    
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.AmountPaid, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.AmountPaid, new { @class = "form-control" })*@
+            @Html.DropDownList("AmountPaid", new SelectList(listItems, "Value", "Text", "2000"), htmlAttributes: new { @class = "form-control", @selected = "2000" })
+            @Html.ValidationMessageFor(m => m.AmountPaid, "", new { @class = "text-danger" })
+        </div>
+    </div> 
+}   
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DatePaid, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DatePaid, new { @class = "form-control datepicker2", placeholder = "Enter Date Paid here..." })
+            @Html.ValidationMessageFor(m => m.DatePaid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="reg-divider">Referral Reference Number & Login Password Details</div>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReferenceNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ReferenceNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ReferenceNumber, "", new { @class = "text-danger" })
+            <span class="text-danger">@ViewBag.ReferenceError</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Name, new { @Value = "Member" });
+    
+    <!--Select the Role Type for the User-->
+    @*<div class="form-group">
+        @Html.Label("Select Your User Type", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Name")
+        </div>
+    </div>*@
+    <!--Ends Here-->
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<small>By clicking Create an account, you agree to our Terms and Cookie use policy.</small>*@
+            <input type="submit" class="btn btn-default btn-success" value="Register Now!" name="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
